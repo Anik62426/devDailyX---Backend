@@ -36,7 +36,18 @@ router.post("/login", async (req, res) => {
       // { expiresIn: "1h" }
     );
 
+
     const cookieOptions = {
+      httpOnly: true,
+      secure: true,        // 🔐 REQUIRED on Render (HTTPS)
+      sameSite: "none",    // 🌍 REQUIRED for cross-site cookies
+      maxAge: 7 * 24 * 60 * 60 * 1000,
+    };
+
+    res.cookie("userId", user._id.toString(), cookieOptions);
+    //res.cookie("token", token, cookieOptions);
+
+   /* const cookieOptions = {
       httpOnly: true,
       secure: false,
       sameSite: "lax",
@@ -46,8 +57,8 @@ router.post("/login", async (req, res) => {
     res.cookie("userId", user._id.toString(), cookieOptions);
     res.cookie("userId", user._id.toString(), {
       ...cookieOptions,
-      httpOnly: false, 
-    });
+      httpOnly: false,
+    }); */
 
     return res.json({
       message: "Login successful",

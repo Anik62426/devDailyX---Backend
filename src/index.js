@@ -20,9 +20,9 @@ app.use(express.json());
 // const PORT = process.env.PORT || 3000;
 // app.use(cookieParser());
 
-app.get('/', function (req, res) {
-  console.log(req.cookies?.userId);  
-})
+// app.get('/', function (req, res) {
+//   console.log(req.cookies?.userId);  
+// })
  
 
 connectDB()
