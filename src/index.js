@@ -4,8 +4,6 @@ import authRouter from "./routes/auth.js";
 import cors from "cors";
 import dotenv from "dotenv";
 import jwt from "jsonwebtoken";
-// import cookieParser from "cookie-parser";
-// import bcrypt from "bcryptjs";
 import  {User} from "./models/user.modal.js";
 import questionRouter from "./routes/question.js";
 import solutionRouter from "./routes/solution.route.js";
@@ -16,14 +14,13 @@ dotenv.config();
 
 const app = express();
 app.use(cookieParser());
-// const PORT = process.env.PORT || 3000;
-
 app.use(cors({ origin: true, credentials: true }));
-
-
-
 app.use(express.json());
-app.use(cookieParser());
+
+// const PORT = process.env.PORT || 3000;
+// app.use(cookieParser());
+
+ console.log(req.cookies?.userId);
 
 connectDB()
 .then(() => {
