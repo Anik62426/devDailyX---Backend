@@ -6,6 +6,7 @@ import { User } from "../models/user.modal.js";
 export const verifyJWT = asyncHandler(async(req, _, next) => {
     try {
         const token = req.cookies?.userId 
+        console.log(token, " Here is the cookie from auth middleware")
         
         if (!token) {
             throw new ApiError(401, "Unauthorized request")
