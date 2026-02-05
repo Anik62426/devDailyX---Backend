@@ -9,6 +9,10 @@ import cookieParser from "cookie-parser";
 import  {User} from "./models/user.modal.js";
 import questionRouter from "./routes/question.js";
 import solutionRouter from "./routes/solution.route.js";
+import cookieParser from "cookie-parser";
+
+app.use(cookieParser());
+
 dotenv.config();
 
 const app = express();
