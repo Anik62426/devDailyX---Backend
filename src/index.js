@@ -56,6 +56,12 @@ app.post("/Signup",async(req,res)=>{
   const token = jwt.sign(data,'sercet_ecom');
   res.json({success:true,token})
 })
+
+app.get("/logout",async(req,res)=>{
+  res.clearCookie("userId");
+  res.json({message: " Logout clearly"})
+})
+
 app.use("/api/auth", authRouter);
 app.use("/api/question", questionRouter);
 app.use("/api/solution", solutionRouter);
