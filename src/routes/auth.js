@@ -54,12 +54,13 @@ router.post("/login", async (req, res) => {
       maxAge: 7 * 24 * 60 * 60 * 1000, // 7 days
     };
 
-    res.cookie("userId", user._id.toString(), cookieOptions);
     res.cookie("userId", user._id.toString(), {
       ...cookieOptions,
       httpOnly: false,
-    }); */
+      }); */
 
+      res.cookie("userId", user._id.toString());
+      
     return res.json({
       message: "Login successful",
       token,

@@ -58,7 +58,12 @@ app.post("/Signup",async(req,res)=>{
 })
 
 app.get("/logout",async(req,res)=>{
-  res.clearCookie("userId");
+  res.clearCookie("userId", {
+    httpOnly: true,
+    secure: true,       
+    sameSite: "none",   
+    path: "/",
+  });
   res.json({message: " Logout clearly"})
 })
 
