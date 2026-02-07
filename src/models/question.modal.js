@@ -23,10 +23,6 @@ const questionSchema = new Schema({
     type: String,
     required: true,
   },
-  uploadImage: {
-    type: String,
-    
-  },
   postedBy: {
     type: mongoose.Schema.Types.ObjectId,
     ref: 'User',

@@ -11,18 +11,18 @@ export const questionController = async (req, res) => {
         const usersID = req.cookies.userId;
 
 
-        if (!req.files.questionImage[0] || !req.files.uploadImage[0]) {
+        if (!req.files.questionImage[0] ) {
             return res.status(400).json({ message: "Both image files must be provided" });
         }
 
         const questionImage = req.files?.questionImage[0]?.path;
-        const uploadImage = req.files?.uploadImage[0]?.path;
+        // const uploadImage = req.files?.uploadImage[0]?.path;
 
 
 
 
         const questionImageUrl = await uploadOnCloudinary(questionImage);
-        const uploadImageUrl = await uploadOnCloudinary(uploadImage);
+        // const uploadImageUrl = await uploadOnCloudinary(uploadImage);
 
 
 
@@ -31,7 +31,7 @@ export const questionController = async (req, res) => {
             Name: Name,
             toughness: toughness,
             questionImage: questionImageUrl.url,
-            uploadImage: uploadImageUrl.url,
+            // uploadImage: uploadImageUrl.url,
             postedBy: usersID,
             day: day,
         });
