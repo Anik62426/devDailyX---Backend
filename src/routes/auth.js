@@ -39,8 +39,8 @@ router.post("/login", async (req, res) => {
 
     const cookieOptions = {
       httpOnly: true,
-      secure: true,        // 🔐 REQUIRED on Render (HTTPS)
-      sameSite: "none",    // 🌍 REQUIRED for cross-site cookies
+      secure: true,        
+      sameSite: "none",  
       maxAge: 7 * 24 * 60 * 60 * 1000,
     };
 

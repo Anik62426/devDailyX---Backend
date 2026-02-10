@@ -40,7 +40,7 @@ connectDB()
 app.post("/Signup",async(req,res)=>{
   let check = await User.findOne({email:req.body.email})
   if(check){
-    return res.status(400).json({success:false,msg: "user already exist"})
+    return res.status(400).json({success:false,message: "user already exist"})
   }
  
   const user = new User({
@@ -48,13 +48,34 @@ app.post("/Signup",async(req,res)=>{
     password:req.body.password,
   })
   await user.save();
-  const data = {
-    user:{
-      id:user.id
-    }
-  }
-  const token = jwt.sign(data,'sercet_ecom');
-  res.json({success:true,token})
+  // const data = {
+  //   user:{
+  //     id:user.id
+  //   }
+  // }
+
+   const token = jwt.sign(
+        { id: user._id, email: user.email },
+        process.env.JWT_SECRET,
+        // { expiresIn: "1h" }
+      );
+
+  // const token = jwt.sign(data,'sercet_ecom');
+
+  const cookieOptions = {
+      httpOnly: true,
+      secure: true,        
+      sameSite: "none",  
+      maxAge: 7 * 24 * 60 * 60 * 1000,
+    };
+
+    res.cookie("userId", user._id.toString(), cookieOptions);
+
+  return res.json({
+      message: "Signup successful",
+      token,
+      user: { id: user._id, email: user.email, admin:user.admin },
+    });
 })
 
 app.get("/logout",async(req,res)=>{
